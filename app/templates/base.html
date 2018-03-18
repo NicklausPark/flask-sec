@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    {% if title %}
+    <meta charset="UTF-8">
+    <title>{{ title }} - Welcome to Hell</title>
+    {% else %}
+    <title>Bart cant pick locks</title>
+    {% endif %}
+    
+</head>
+<body>
+    <div>Flask-Sec: <a href="/index">Home</a></div>
+    <div>Register: <a href="/register">Sign Up Here</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+</body> 
+</html>
