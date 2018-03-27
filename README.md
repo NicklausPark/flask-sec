@@ -1,6 +1,10 @@
 ### Start virtual evironment
 ```source env/bin/activate```
 
+### **updated virtual environment ###
+
+``` source .env ```
+
 ### Start flask server
 ```flask run```
 
