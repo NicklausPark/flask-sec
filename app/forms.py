@@ -5,7 +5,7 @@ from app.models import User
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(),Length(min=8, max=25, message='please use a stronger password')])
+    password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login now')
 
@@ -17,12 +17,12 @@ class Registration(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        user = User.query.filter(username=username.data).first()
+        user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('This username is not available')
 
     def validate_email(self, email):
-        email = User.query.filter(email=email.data).first()
+        email = User.query.filter_by(email=email.data).first()
         if email is not None:
             raise ValidationError('This email is already in use')
     
