@@ -26,4 +26,7 @@ class Registration(FlaskForm):
         email = User.query.filter_by(email=email.data).first()
         if email is not None:
             raise ValidationError('This email is already in use')
-    
+
+class SubmitPost(FlaskForm):
+    new_post = StringField('', validators=[Length(min=0, max=140), DataRequired()])
+    submit = SubmitField('Submit')

@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
-from app.forms import LoginForm, Registration 
+from app.models import User, Post
+from app.forms import LoginForm, Registration, SubmitPost
 from flask import render_template, flash, redirect
 from app import app, db
 
@@ -9,7 +9,8 @@ from app import app, db
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('index.html', title="pandacarry")
+    posts = Post.query.all()
+    return render_template('index.html', title="welcome to my page", posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -43,3 +44,15 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/post', methods=['GET', 'POST'])
+def submit_post():
+    form = SubmitPost()
+    if request.method == 'POST':
+        user_post = Post(body=form.new_post.data)
+        print('user_post', user_post)
+        db.session.add(user_post)
+        db.session.commit()
+        flash('Your Post was successfully submitted')
+        return redirect(url_for('index'))
+    return render_template('submit_post.html', form=form)
