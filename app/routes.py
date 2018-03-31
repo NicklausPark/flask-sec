@@ -1,15 +1,15 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
-from app.forms import LoginForm, Registration
+from app.forms import LoginForm, Registration 
 from flask import render_template, flash, redirect
 from app import app, db
 
 @app.route('/')
-@app.route('/index', methods=['GET'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('index.html', title="dildosmasher")
+    return render_template('index.html', title="pandacarry")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
